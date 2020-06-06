@@ -2,3 +2,6 @@
 /.vscode
 .env
 yarn.lock
+**/points/*
+!**/points/.gitkeep
+**/database.sqlite

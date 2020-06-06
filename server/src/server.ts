@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express';
 import { resolve } from 'path';
 import cors from 'cors';
+import { errors } from 'celebrate';
 import routes from './routes';
 import 'express-async-errors';
 
@@ -10,7 +11,7 @@ app.use(express.json());
 
 app.use(routes);
 app.use('/uploads', express.static(resolve(__dirname, '..', 'uploads')));
-
+app.use(errors());
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   return response.status(500).json({
     status: 'error',

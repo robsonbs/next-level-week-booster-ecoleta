@@ -17,6 +17,7 @@ import api from '../../services/api';
 
 interface Point {
   image: string;
+  image_url: string;
   name: string;
   email: string;
   whatsapp: string;
@@ -141,37 +142,41 @@ const Detail: React.FC = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
-        <TouchableOpacity onPress={handleNavigateBack}>
-          <Icon name="arrow-left" color="#34CB79" size={32} />
-        </TouchableOpacity>
-        <Image
-          style={styles.pointImage}
-          source={{
-            uri: point.image,
-          }}
-        />
-        <Text style={styles.pointName}>{point.name}</Text>
-        <Text style={styles.pointItems}>
-          {point.items && point.items.map(item => item.title).join(', ')}.
-        </Text>
-        <View style={styles.address}>
-          <Text style={styles.addressTitle}>Endereço</Text>
-          <Text style={styles.addressContent}>
-            {point?.city}, {point?.uf}
-          </Text>
-        </View>
-      </View>
-      <View style={styles.footer}>
-        <RectButton style={styles.button} onPress={handleWhatsapp}>
-          <FontAwesome name="whatsapp" size={20} color="#fff" />
-          <Text style={styles.buttonText}>Whatsapp</Text>
-        </RectButton>
-        <RectButton style={styles.button} onPress={handleComposeMail}>
-          <Icon name="mail" size={20} color="#fff" />
-          <Text style={styles.buttonText}>E-mail</Text>
-        </RectButton>
-      </View>
+      {point && (
+        <>
+          <View style={styles.container}>
+            <TouchableOpacity onPress={handleNavigateBack}>
+              <Icon name="arrow-left" color="#34CB79" size={32} />
+            </TouchableOpacity>
+            <Image
+              style={styles.pointImage}
+              source={{
+                uri: point.image_url,
+              }}
+            />
+            <Text style={styles.pointName}>{point.name}</Text>
+            <Text style={styles.pointItems}>
+              {point.items && point.items.map(item => item.title).join(', ')}.
+            </Text>
+            <View style={styles.address}>
+              <Text style={styles.addressTitle}>Endereço</Text>
+              <Text style={styles.addressContent}>
+                {point?.city}, {point?.uf}
+              </Text>
+            </View>
+          </View>
+          <View style={styles.footer}>
+            <RectButton style={styles.button} onPress={handleWhatsapp}>
+              <FontAwesome name="whatsapp" size={20} color="#fff" />
+              <Text style={styles.buttonText}>Whatsapp</Text>
+            </RectButton>
+            <RectButton style={styles.button} onPress={handleComposeMail}>
+              <Icon name="mail" size={20} color="#fff" />
+              <Text style={styles.buttonText}>E-mail</Text>
+            </RectButton>
+          </View>
+        </>
+      )}
     </SafeAreaView>
   );
 };
